@@ -1,0 +1,4 @@
+# Ignore local agent environment and runtime logs
+agent.env
+memory.json
+logs/

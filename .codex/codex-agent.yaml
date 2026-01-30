@@ -1,0 +1,34 @@
+agent:
+  name: codex-agent
+  description: "Configuration for the Codex LLM agent used by this repo"
+
+  model:
+    name: "${MODEL:-gpt-4o-mini}"
+    temperature: 0.2
+    max_tokens: 2048
+    top_p: 0.95
+    streaming: false
+
+  tools:
+    - name: shell
+      type: subprocess
+      allowed_commands:
+        - bash
+        - python
+    - name: git
+      type: git_wrapper
+      readonly: false
+
+  memory:
+    type: local_file
+    path: .codex/memory.json
+
+  plugins: []
+
+  safety:
+    allowed_hosts: []
+    disallowed_actions: []
+
+logging:
+  level: INFO
+  file: logs/codex-agent.log

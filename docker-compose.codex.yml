@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  codex-agent:
+    image: ghcr.io/yourorg/codex-agent:latest
+    container_name: codex-agent
+    env_file:
+      - .codex/agent.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.codex:/app/.codex
+      - ./logs:/app/logs
+    restart: unless-stopped
