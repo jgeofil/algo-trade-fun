@@ -123,7 +123,7 @@ create table features_1m (
 );
 
 create table holder_snapshots (
-  mint text not null,
+  mint text not null references tokens(mint),
   sampled_at timestamptz not null,
   top5_share numeric,
   top10_share numeric,
