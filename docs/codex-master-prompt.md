@@ -110,7 +110,7 @@ create table amm_snapshots (
 );
 
 create table features_1m (
-  mint text not null,
+  mint text not null references tokens(mint),
   bucket_start timestamptz not null,
   venue text not null,
   trades int,
