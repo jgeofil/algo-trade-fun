@@ -165,7 +165,7 @@ create table orders (
 create table fills (
   id bigserial primary key,
   order_id bigint references orders(id),
-  mint text not null,
+  mint text not null references tokens(mint),
   side text not null,
   qty numeric,
   notional_sol numeric,
