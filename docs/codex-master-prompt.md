@@ -100,7 +100,7 @@ create table curve_snapshots (
 );
 
 create table amm_snapshots (
-  mint text not null,
+  mint text not null references tokens(mint),
   slot bigint not null,
   venue text not null,
   reserves jsonb,
