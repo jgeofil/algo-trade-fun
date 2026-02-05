@@ -133,7 +133,7 @@ create table holder_snapshots (
 );
 
 create table risk_flags (
-  mint text not null,
+  mint text not null references tokens(mint),
   flagged_at timestamptz not null,
   flag text not null,
   severity int not null,
