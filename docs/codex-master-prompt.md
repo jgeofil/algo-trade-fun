@@ -144,7 +144,7 @@ create table risk_flags (
 create table intents (
   id bigserial primary key,
   created_at timestamptz default now(),
-  mint text not null,
+  mint text not null references tokens(mint),
   venue text not null,
   side text not null,
   notional_lamports bigint,
