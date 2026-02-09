@@ -86,7 +86,7 @@ create table raw_logs (
 create table transactions (
   signature text primary key,
   slot bigint not null,
-  block_time timestamptz,
+  block_time timestamptz not null,
   tx jsonb not null
 );
 
