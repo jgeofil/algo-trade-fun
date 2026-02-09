@@ -147,7 +147,7 @@ create table intents (
 
 create table orders (
   id bigserial primary key,
-  intent_id bigint references intents(id),
+  intent_id bigint references intents(id) on delete set null,
   signature text,
   status text,
   error text,
