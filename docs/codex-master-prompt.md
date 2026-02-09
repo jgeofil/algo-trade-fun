@@ -146,7 +146,7 @@ create table intents (
   created_at timestamptz default now(),
   mint text not null references tokens(mint),
   venue text not null,
-  side text not null,
+  side text not null check (side in ('BUY', 'SELL')),
   notional_lamports bigint,
   max_slippage_bps int,
   ttl_ms int,
