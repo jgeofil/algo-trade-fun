@@ -179,13 +179,12 @@ create table fills (
 
 # Phase A — Contracts + DB + Skeleton Services
 
-### Requirements
+## Requirements
 - Protobufs for gRPC streaming (events and intents)
 - Rust gRPC server with event stream
 - TypeScript gRPC client
 - Postgres migrations (SQL)
 - Heartbeat stream and `TRADING_DISABLED` rejection path
-
 ### Acceptance Gate
 - Services run for 1 hour
 - WS reconnect works
