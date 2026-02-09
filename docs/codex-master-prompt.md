@@ -83,7 +83,7 @@ create table tokens (
   mint text primary key,
   creator text,
   launched_slot bigint,
-  status text not null,
+  status text not null check (status in ('LAUNCHED', 'MIGRATED')),
   curve_account text,
   migrated_slot bigint,
   created_at timestamptz default now()
