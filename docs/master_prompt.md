@@ -156,7 +156,7 @@ create table orders (
 
 create table fills (
   id bigserial primary key,
-  order_id bigint references orders(id),
+  order_id bigint references orders(id) on delete cascade,
   mint text not null,
   side text not null,
   qty numeric,
