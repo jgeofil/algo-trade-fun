@@ -82,7 +82,7 @@ create table tokens (
 );
 
 create table curve_snapshots (
-  mint text not null,
+  mint text not null references tokens(mint) on delete cascade,
   slot bigint not null,
   sold_pct numeric,
   price_est numeric,
