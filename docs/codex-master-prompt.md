@@ -195,13 +195,12 @@ create table fills (
 
 # Phase B — Pure RPC Ingest Pipeline
 
-### Requirements
+## Requirements
 - `logsSubscribe` to Pump.fun program
 - Resolve tx via `getTransaction`
 - Persist `raw_logs` + `transactions`
 - Minimal decoder (best-effort) to infer mint + side/size from token balance deltas
 - Aggregate `features_1m`
-
 ### Acceptance Gate
 - Non-empty `features_1m` for active mints
 - Deterministic replay from DB
