@@ -54,20 +54,21 @@ Create a minimal set of messages and services:
 Implement migrations for:
 
 ```sql
-create table raw_logs (
-  id bigserial primary key,
-  slot bigint not null,
-  signature text not null unique,
-  program_id text not null,
-  logs jsonb not null,
-  received_at timestamptz not null default now()
-);
-
 create table transactions (
   signature text primary key,
   slot bigint not null,
   block_time timestamptz,
   tx jsonb not null
+);
+
+create table raw_logs (
+  id bigserial primary key,
+  slot bigint not null,
+  signature text not null references transactions(signature) on delete cascade,
+  program_id text not null,
+  logs jsonb not null,
+  received_at timestamptz not null default now(),
+  unique (signature, program_id)
 );
 
 create table tokens (
