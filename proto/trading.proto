@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package trading;
+
+message Heartbeat {
+  int64 unix_ms = 1;
+  string source = 2;
+}
+
+message TokenLaunched {
+  string mint = 1;
+  string creator = 2;
+  int64 slot = 3;
+}
+
+message TradeObserved {
+  string mint = 1;
+  string venue = 2;
+  string side = 3;
+  double size_sol = 4;
+  int64 slot = 5;
+  string signer = 6;
+}
+
+message CurveSnapshot {
+  string mint = 1;
+  int64 slot = 2;
+  double sold_pct = 3;
+  double price_est = 4;
+  double mc_est = 5;
+}
+
+message AmmSnapshot {
+  string mint = 1;
+  string venue = 2;
+  int64 slot = 3;
+  double price_est = 4;
+  double liquidity_est = 5;
+}
+
+message FeatureBucket {
+  string mint = 1;
+  string venue = 2;
+  int64 bucket_start_unix = 3;
+  int32 trades = 4;
+  int32 uniq_signers = 5;
+  double vol_in_sol = 6;
+  double vol_out_sol = 7;
+  double net_inflow_sol = 8;
+  double whale_share_top5 = 9;
+}
+
+message RiskFlagEvent {
+  string mint = 1;
+  string flag = 2;
+  int32 severity = 3;
+  int64 flagged_at_unix = 4;
+}
+
+message Event {
+  oneof payload {
+    Heartbeat heartbeat = 1;
+    TokenLaunched token_launched = 2;
+    TradeObserved trade_observed = 3;
+    CurveSnapshot curve_snapshot = 4;
+    AmmSnapshot amm_snapshot = 5;
+    FeatureBucket feature_bucket = 6;
+    RiskFlagEvent risk_flag = 7;
+  }
+}
+
+message TradeIntent {
+  string mint = 1;
+  string venue = 2;
+  string side = 3;
+  int64 notional_lamports = 4;
+  int32 max_slippage_bps = 5;
+  int32 ttl_ms = 6;
+  repeated string reasons = 7;
+}
+
+message IntentResponse {
+  bool accepted = 1;
+  string reason = 2;
+}
+
+service ExecutorService {
+  rpc StreamEvents(Heartbeat) returns (stream Event);
+  rpc SubmitIntent(TradeIntent) returns (IntentResponse);
+}
