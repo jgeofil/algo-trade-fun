@@ -8,9 +8,9 @@ async fn main() {
 
     info!("executor bootstrapped - TODO: wire gRPC + RPC ingest");
 
-    tokio::signal::ctrl_c()
-        .await
-        .expect("failed to install CTRL+C handler");
+    if let Err(err) = tokio::signal::ctrl_c().await {
+        tracing::error!(error = %err, "Failed to install CTRL+C handler");
+    }
 
     info!("executor shutdown");
 }
