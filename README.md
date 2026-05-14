@@ -12,7 +12,7 @@ See the detailed master prompt for building Phase A–B services and schema:
 2. Start Postgres:
    - `docker compose up -d db`
 3. Run migrations manually (placeholder):
-   - `psql -h localhost -U $POSTGRES_USER -d $POSTGRES_DB -f migrations/001_init.sql`
+   - `source .env && psql -h localhost -U $POSTGRES_USER -d $POSTGRES_DB -f migrations/001_init.sql`
 
 ## Repo layout
 - `executor-rs/`: Rust executor skeleton
